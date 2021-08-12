@@ -1,0 +1,23 @@
+name: Deploy Staging Theme
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  deploy:
+    name: Deploy Staging Theme
+    runs-on: ubuntu-latest
+    steps:
+      # basically git clone
+      - uses: actions/checkout@v2
+      # deploy shopify theme
+      - uses: pgrimaud/action-shopify@2.1.3
+        env:
+          SHOPIFY_PASSWORD: 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
+          SHOPIFY_STORE_URL: bbb-london.myshopify.com
+          SHOPIFY_THEME_ID: 125306110109
+          THEME_PATH: ./
+        with:
+          args: --ignored-file=config/settings_data.json --ignored-file=locales/*
