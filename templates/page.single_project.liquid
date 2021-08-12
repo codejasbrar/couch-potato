@@ -1,0 +1,11 @@
+{% include 'global-variables' %}
+<div class="page">
+  {% include 'breadcrumbs' %}
+  <div class="container single_project_container pt-20 {% if offset_pages_margin_top_d > 0 %} mt-lg-{{ offset_pages_margin_top_d }}{% endif %} pb-60{% if offset_pages_margin_bottom_d > 0 %} mb-lg-{{ offset_pages_margin_bottom_d }}{% endif %}">
+    <h1 class="page__title pb-5 mt-10 mb-15 border-bottom project_page_title">{{ page.title }}</h1>
+    
+    
+        {% section 'single_project_sidebar' %}
+    
+  </div>
+</div>

@@ -1,0 +1,36 @@
+{% include 'breadcrumbs' %}
+<div class="portfolio blogs pb-1 mt-20">
+  <div class="container">
+    <h1 class="blog_title h3 mb-40 text-left border-bottom">{{ blog.title }}</h1>
+    <div class="row pb-60">
+      <div class="blogs__body col">
+        {% section 'portfolio-body' %}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  @media only screen and (min-width: 768px) and (max-width: 1024px)
+  {
+    .template-blog .blogs__body.col {
+      max-width: 100%;
+    }
+    .blog-body .post h3 a {
+      font-size: 18px;
+      line-height: 27px;
+    }
+    .pagination__page a {
+      font-size: 15px;
+      line-height: 20px;
+    }
+    .pagination__page.current {
+      font-size: 15px;
+      line-height: 20px;
+    }
+  }
+</style>
+{%- if settings.blog_enable_sticky -%}
+<script>
+  Loader.require({type: "script", name: "sticky_sidebar"});
+</script>
+{%- endif -%}

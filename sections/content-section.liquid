@@ -1,0 +1,68 @@
+<div id="section-cta" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <h2 class="text-center" style="color: {{ section.settings.heading_color }};"> {{ section.settings.text-box }} </h2>
+    <p class="sub_heading text-center">{{ section.settings.sub_heading }}</p>
+    {{ section.settings.content }}
+  </div>
+</div>
+
+<style>
+  p{
+    color:  {{ section.settings.content_color }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Content section",
+  "settings": [
+    {
+      "id": "bg_color",
+      "type": "color",
+      "label": "Background color"
+    },
+    {
+      "id": "text-box",
+      "type": "text",
+      "label": "Heading",
+      "info": "use <br/> to break line",
+      "default": "Title"
+    },
+    {
+      "id": "heading_color",
+      "type": "color",
+      "label": "Heading color"
+    },
+    {
+      "id": "sub_heading",
+      "type": "text",
+      "label": "Sub Heading",
+      "info": "use <br/> to break line",
+      "default": "Sub Heading"
+    },
+    {
+      "id": "content",
+      "type": "richtext",
+      "label": "Content",
+      "info": "use <br/> to break line"
+    },
+    {
+      "id": "content_color",
+      "type": "color",
+      "label": "Content color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content section",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

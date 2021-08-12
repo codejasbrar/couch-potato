@@ -1,0 +1,54 @@
+
+
+<div class="container">
+
+  <div class="row">
+  
+   {% for block in section.blocks %}
+    <div class="col-md-4 portfolio_col">
+      <a href="{{ block.settings.link }}">
+        <img src="{{ block.settings.image | img_url:'master' }}">
+        <p class>{{ block.settings.title }}</p>
+      </a>
+    </div>
+   {% endfor %}
+  </div>
+
+</div>
+
+
+{% schema %}
+  {
+    "name": "Designer section",
+    "settings": [],
+"blocks": [
+      {
+        "type": "project",
+        "name": "Projects",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Project image"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+          {
+            "id": "link",
+            "type": "url",
+            "label": "Project url"
+          }
+]
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

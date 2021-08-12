@@ -1,0 +1,18 @@
+{% include 'global-variables' %}
+<div class="page">
+  <div class="bcrumb mob-only">
+  {% include 'breadcrumbs' %}
+  </div>
+  <div class="container {% if offset_pages_margin_top_d > 0 %} mt-lg-{{ offset_pages_margin_top_d }}{% endif %} pb-60{% if offset_pages_margin_bottom_d > 0 %} mb-lg-{{ offset_pages_margin_bottom_d }}{% endif %}">
+    <h1 class="Brands_title page__title mt-100 mb-60 text-left">{{ page.title }}</h1>
+   
+    {% comment %}
+    <div class="rte">
+      {% include 'parse-for-icons' content: page.content %}
+    </div>
+    {% endcomment %}
+    
+    {% section 'brands_section' %}
+    
+  </div>
+</div>

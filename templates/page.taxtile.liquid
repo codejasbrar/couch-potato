@@ -1,0 +1,21 @@
+{% include 'global-variables' %}
+<div class="page">
+  {% include 'breadcrumbs' %}
+  <div class="container {% if offset_pages_margin_top_d > 0 %} mt-lg-{{ offset_pages_margin_top_d }}{% endif %} pb-60{% if offset_pages_margin_bottom_d > 0 %} mb-lg-{{ offset_pages_margin_bottom_d }}{% endif %}">
+    <h1 class="page__title mt-30 text-left">{{ page.title }}</h1>
+    <div class="rte dscds">
+      {% include 'parse-for-icons' content: page.content %}
+    </div>
+    
+    
+    <ul class="ctag">
+{% for tag in collections.all.tags %} 
+  <li><a class="grid_1 {{ tag | handle }}" title="{{ tag }}" href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+{% endfor %}
+</ul>
+    
+    
+    
+    
+  </div>
+</div>

@@ -1,0 +1,162 @@
+
+
+<div class="row border-bottom pb-10">
+    <div class="col-md-6 contact_us_left">
+      <h2 class="h3 contact_heading border-bottom">
+         {{ section.settings.contact_left_heading }}
+      </h2>
+      <div class="row">
+        <div class="col-md-5 email_div">Email <br>
+          <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+        </div>
+        <div class="col-md-6 phone_div">Telephone <br>
+          <a href="tel:{{ section.settings.contact_phone }}">{{ section.settings.contact_phone }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 contact_us_right desktop_only">
+      <h2 class="h3 contact_heading border-bottom">
+         {{ section.settings.contact_right_heading }}
+      </h2>
+      <p>{{ section.settings.right_second_heading }}</p>
+      <div class="row">
+        <div class="col-md-4 showroom_details">
+          <p>{{ section.settings.showroom_details }}</p>
+        </div>
+        <div class="col-md-5 opening_details">
+          <p>{{ section.settings.opening_details }}</p>
+        </div>
+        <div class="col-md-3 empty"></div>
+      </div>
+    </div>
+  
+  
+  <div class="col-md-6 form_col mobile_only">
+    
+
+<p class="form_intro">{{ 'contact.form.intro_title' | t }}</p>
+    {% form 'contact' %}
+        {%- if form.posted_successfully? -%}
+            <p class="form-success">{{ 'contact.form.post_success' | t }}</p>
+        {%- endif -%}
+        <label for="ContactFormName" class="label-required">{{ 'contact.form.name_title' | t }}</label>
+        <input type="text"
+               name="contact[name]"
+               id="ContactFormName"
+               placeholder="{{ 'contact.form.name_placeholder' | t }}"
+               value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+               required="required">
+        <label for="ContactFormEmail" class="label-required">{{ 'contact.form.email_title' | t }}</label>
+        <input type="email"
+               name="contact[email]"
+               id="ContactFormEmail"
+               placeholder="{{ 'contact.form.email_placeholder' | t }}"
+               value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+               spellcheck="false"
+               autocomplete="off"
+               autocapitalize="off"
+               required="required">
+        {% comment %}
+
+        <label for="ContactFormPhone">{{ 'contact.form.phone_title' | t }}</label>
+        <input type="tel"
+               class="form-control"
+               name="contact[phone]"
+               id="ContactFormPhone"
+               placeholder="{{ 'contact.form.phone_placeholder' | t }}"
+               value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+        
+        {% endcomment %}
+
+        <label for="ContactFormMessage" class="label-required">{{ 'contact.form.message_title' | t }}</label>
+        <textarea rows="8"
+                  name="contact[body]"
+                  id="ContactFormMessage"
+                  placeholder="{{ 'contact.form.message_placeholder' | t }}"
+                  required="required">
+          {%- if form.body -%}
+            {{ form.body }}
+          {%- endif -%}
+        </textarea>
+        {% include 'form-get-message' %}
+        <div class="pt-10">
+          <button type="submit" class="btn btn--secondary">{% comment %}<i class="mr-5">{% render 'icon-theme-196' %}</i> {% endcomment %} {{ 'contact.form.send' | t }}</button>
+        </div>
+      {% endform %}
+
+    
+  </div>
+  
+  
+  
+    <div class="col-md-6 contact_us_right mobile_only">
+      <h2 class="h3 contact_heading border-bottom">
+         {{ section.settings.contact_right_heading }}
+      </h2>
+      <div class="row">
+        <div class="col-md-4 showroom_details">
+          <p>{{ section.settings.showroom_details }}</p>
+          <p>{{ section.settings.right_second_heading }}</p>
+        </div>
+        <div class="col-md-5 opening_details">
+          <p>{{ section.settings.opening_details }}</p>
+        </div>
+        <div class="col-md-3 empty"></div>
+      </div>
+    </div>
+  
+  
+  
+</div>
+
+
+{% schema %}
+  {
+    "name": "Contact Section",
+    "settings": [
+                {
+                 "type": "text",
+                 "id": "contact_left_heading",
+                 "label": "Contact Left Heading"
+                },
+                {
+                 "type": "text",
+                 "id": "contact_email",
+                 "label": "Contact Mail"
+                },
+                {
+                 "type": "number",
+                 "id": "contact_phone",
+                 "label": "Contact Phone"
+                },
+                {
+                 "type": "text",
+                 "id": "contact_right_heading",
+                 "label": "Contact Right Heading"
+                },
+                {
+                 "type": "text",
+                 "id": "right_second_heading",
+                 "label": "Contact Right Second Heading"
+                },
+                {
+                 "type": "textarea",
+                 "id": "showroom_details",
+                 "label": "Showroom Details",
+                 "info": "Use <br> to start new line"
+                },
+                {
+                 "type": "textarea",
+                 "id": "opening_details",
+                 "label": "Opening Hours",
+                 "info": "Use <br> to start new line"
+                }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

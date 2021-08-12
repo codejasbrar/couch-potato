@@ -1,0 +1,445 @@
+<!-- snippets/product-get-options.liquid -->
+{%- unless product.has_only_default_variant -%}
+{%- assign options_type_circle_color = settings.product_options_type_circle_color | split: '|' | handleize -%}
+{%- assign options_type_circle_image = settings.product_options_type_circle_image | split: '|' | handleize -%}
+{%- assign options_type_square_image = settings.product_options_type_square_image | split: '|' | handleize -%}
+{%- assign options_type_square_color = settings.product_options_type_square_color | split: '|' | handleize -%}
+{%- assign options_type_select = settings.product_options_type_select | split: '|' | handleize -%}
+{%- assign options_type_large_text = settings.product_options_type_large_text | split: '|' | handleize -%}
+{%- assign auto_selected_options = settings.product_auto_selected_options | split: '|' | handleize -%}
+{%- assign options_show_title = options_show_title | default: false -%}
+{%- assign options_type = options_type | default: 1 -%}
+{% capture options_type_class %}
+{%- case options_type -%}
+{%- when 1 %}product-options--type-collection
+        {%- when 2 %}product-options--type-page
+        {%- when 3 %}product-options--type-footbar
+        {%- endcase -%}
+{% endcapture %}
+<div class="product-options {{ options_type_class }}{% if centered %} product-options--centered{% endif %}{% if mobile_centered %} product-options--mobile-centered{% endif %}{% if mobile_start %} product-options--mobile-start{% endif %}{% unless trigger %} js-product-options{% endunless %}" data-js-product-options{% if options_type == 1 and settings.product_variant_change_on_hover %} data-js-options-onhover{% endif %}{% if change_history %} data-js-change-history{% endif %}>
+  {%- assign options_limit = 3 -%}
+  {%- if options_type == 1 and settings.product_options_listing_visibility != 'all' -%}
+  {%- assign options_limit = settings.product_options_listing_visibility | abs -%}
+  {%- assign enable_select_options_button = false -%}
+  {%- assign options_with_values_size = product.options_with_values | size -%}
+  {%- if options_with_values_size > options_limit -%}
+  {%- assign enable_select_options_button = true -%}
+  {%- endif -%}
+  {%- endif -%}
+  {%- for option in product.options_with_values -%}
+
+  {% assign is_upholstery = false %}
+  {% assign downcased_option = option.name %}
+  {% if downcased_option == 'color' or downcased_option == 'colour' or downcased_option == 'finishes' or downcased_option == 'top finish' or downcased_option == 'tonus fabric' or downcased_option == 'colour finishes' or downcased_option == 'Colour (Shell)' or downcased_option == 'Hopsak - Fabric' or downcased_option == 'leather' or downcased_option == 'colours (tonus fabric)' or downcased_option == 'base frame' or downcased_option == 'backrest and seat' or downcased_option == 'plywood' or downcased_option == 'Base' or downcased_option == 'table top' or downcased_option == 'shell' or downcased_option == 'fabric' or downcased_option == 'fabric colour' or downcased_option == 'leather colour' or downcased_option == 'frame/seat colour' or downcased_option == 'seat/back colour' or downcased_option == 'top - structure colour' or downcased_option == 'top colour' or downcased_option == 'structure-cushion colour' or downcased_option == 'top-leg colour' or downcased_option == 'finish3' or downcased_option == 'upholstery1' or downcased_option == 'Upholstery1' or downcased_option == 'acqua leather' or downcased_option == 'cane or upholstery' or downcased_option == 'frame3' or downcased_option == 'frame upholstery1' or downcased_option == 'shell upholstery1' or downcased_option == 'cushion upholstery1' or downcased_option == 'frame3 colour' or downcased_option == 'wood1' or downcased_option == 'case1' or downcased_option == 'top5' or downcased_option == 'finish5' or downcased_option == 'armrests1' or downcased_option == 'seat upholstery1' or downcased_option == 'outer upholstery1' or downcased_option == 'inner shell colour' or downcased_option == 'chair colour1' or downcased_option == 'front upholstery1' or downcased_option == 'shell colour1' or downcased_option == 'design' or downcased_option == 'shell finish1' or downcased_option == 'seat and base finish1' or downcased_option == 'leather colour1' or downcased_option == 'base finish1' or downcased_option == 'seat colour1' or downcased_option == 'frame colour1' or downcased_option == 'backrest and seat colour1' or downcased_option =='back/armrest colour1' or downcased_option =='frame1' or downcased_option =='Seat Colour1' or downcased_option =='seat/leg finish1' or downcased_option =='diffuser colour1' or downcased_option =='cushion1' or downcased_option =='seat finish1' or downcased_option =='frame and top1' or downcased_option =='seat/reverse of seat colour1' or downcased_option =='wood type1' or downcased_option =='wood top1' or downcased_option =='back1' or downcased_option =='colour (frame/top)' or downcased_option =='colour (seat and legs/back)' or downcased_option =='cushion colour1' or downcased_option =='colour (legs/top)' or downcased_option =='colour (frame/seat and legs)' or downcased_option =='colour (joints and top/frame)' or downcased_option =='colour (seat/legs)' or downcased_option =='colour (frame/slats)' or downcased_option =='colour (joint and screw)' %}
+  {% assign is_upholstery = true %}
+  {%endif%}
+  {%- assign label_value = null -%}
+  {% capture option_section_html %}
+  {%- assign option_index0 = forloop.index0 -%}
+  <div{% if forloop.index > options_limit %} class="d-none"{% endif %} data-section-container>
+    <label{% unless options_show_title %} class="d-none"{% endunless %}><span>{{ option.name }}:</span><span class="ml-5" data-label-value></span></label>
+    {%- assign clear_name = option.name | handleize -%}
+    {%- if product.selected_variant.id == blank and settings.product_variant_auto_select != 'enable' -%}
+    {%- assign disable_auto_select = false -%}
+    {%- if settings.product_variant_auto_select == 'disable' -%}
+    {%- assign disable_auto_select = true -%}
+    {%- elsif settings.product_variant_auto_select == 'first' and forloop.index != 1 -%}
+    {%- assign disable_auto_select = true -%}
+    {%- elsif settings.product_variant_auto_select == 'first_n_second' and forloop.index != 1 and forloop.index != 2 -%}
+    {%- assign disable_auto_select = true -%}
+    {%- endif -%}
+    {%- if auto_selected_options contains clear_name -%}
+    {%- assign disable_auto_select = false -%}
+    {%- endif -%}
+    {%- endif -%}
+    {%- if disable_auto_select -%}
+    {%- assign enable_select_variant_button = true -%}
+    {%- endif -%}
+    {%- if options_type_circle_color contains clear_name -%}
+    <div class="product-options__section d-flex flex-wrap px-2" data-style="color" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %}>
+      {%- for value in option.values -%}
+      {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+      <div class="product-options__value product-options__value--circle standard-color-{{ value | handleize }} rounded-circle text-hide cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %}"
+           data-js-option-value
+           data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+           {{ trigger_attr }}
+           data-scale="2"
+           {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                                        data-js-tooltip
+           data-tippy-content="{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}"
+           data-tippy-placement="top"
+           data-tippy-distance="6"
+           {%- endif -%}
+           >{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}</div>
+      {%- endfor -%}
+    </div>
+    {%- elsif options_type_circle_image contains clear_name -%}
+    <div class="product-options__section d-flex flex-wrap px-2" data-style="circle-image" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %}>
+      {%- for value in option.values -%}
+      {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+      {% include 'product-get-options-res-image' %}
+      <div class="product-options__value product-options__value--circle rounded-circle text-hide cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+           data-js-option-value
+           data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+           {{ trigger_attr }}
+           {%- if settings.product_format_pjpg -%}
+           data-master="{{ option_image | img_url: '1x1', format: 'pjpg' | replace: '_1x1.', '_[width]x.' }}"
+           data-bg="{{ option_image | img_url: '48x', format: 'pjpg' }}"
+           {%- else -%}
+           data-master="{{ option_image | img_url: '1x1' | replace: '_1x1.', '_[width]x.' }}"
+           data-bg="{{ option_image | img_url: '48x' }}"
+           {%- endif -%}
+           data-scale="2"
+           {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                                        data-js-tooltip
+           data-tippy-content="{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}"
+           data-tippy-placement="top"
+           data-tippy-distance="6"
+           {%- endif -%}
+           >{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}</div>
+      {%- endfor -%}
+    </div>
+    {%- elsif options_type_square_color contains clear_name -%}
+    <div class="product-options__section d-flex flex-wrap" data-style="image" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %}>
+      {%- for value in option.values -%}
+      {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+      <div class="product-options__value product-options__value--square standard-color-{{ value | handleize }} text-hide cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %}"
+           data-js-option-value
+           data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+           {{ trigger_attr }}
+           data-scale="2"
+           {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                                        data-js-tooltip
+           data-tippy-content="{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}"
+           data-tippy-placement="top"
+           data-tippy-distance="6"
+           {%- endif -%}
+           >{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}</div>
+      {%- endfor -%}
+    </div>
+    {%- elsif options_type_square_image contains clear_name -%}
+    <h5>Select {{ option.name }}</h5>
+    <div class="Color options product-options__section swatch swatch--{{ option.name }} {{ count }} " data-style="image" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %}>
+      {% assign count = 0 %}
+      {%- for value in option.values -%}
+      {% assign count = count | plus: 1 %}
+      {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+      {% include 'product-get-options-res-image' %}
+      <div class="ColorType {% if is_upholstery %}color {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+        <div class="tooltip" id="tooltip"><script type="text/javascript">var string = '{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}'; string = string.replace(/\d+/g, ''); document.write(string)</script></div>              
+        <div class="product-options__value product-options__value--square text-hide cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %} lazyload"
+             data-js-option-value
+             data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+             {{ trigger_attr }}
+             {%- if settings.product_format_pjpg -%}
+             data-master="{{ option_image | img_url: '1x1', format: 'pjpg' | replace: '_1x1.', '_[width]x.' }}"
+             data-bg="{{ option_image | img_url: '92x', format: 'pjpg' }}"
+             {%- else -%}
+             data-master="{{ option_image | img_url: '1x1' | replace: '_1x1.', '_[width]x.' }}"
+             data-bg="{{ option_image | img_url: '92x' }}"
+             {%- endif -%}
+             data-scale="2"
+             {%- if settings.tooltips_enable and product_option_enable_tooltips %}
+                                        data-js-tooltip
+             data-tippy-content="{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}"
+             data-tippy-placement="top"
+             data-tippy-distance="6"
+             {%- endif -%}
+             >{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}</div>
+      </div>
+      {%- endfor -%}
+    </div>
+    {%- elsif options_type_large_text contains clear_name -%}
+    <div class="product-options__section d-flex flex-wrap" data-style="large-text" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %}>
+      {%- for value in option.values -%}
+      {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+      <div class="product-options__value product-options__value--large-text d-flex flex-center border cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %}"
+           data-js-option-value
+           data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+           {{ trigger_attr }}
+           data-scale="2"
+           >{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}</div>
+      {%- endfor -%}
+    </div>
+    {%- elsif options_type_select contains clear_name -%}
+
+    <div class="{%unless is_upholstery %}select position-relative {%endunless%} js-dropdown js-select">
+      {%- assign select_dropdown_html = '' -%}
+      <div class="select_dropdown {% if is_upholstery %}swatch_options{% endif %}" data-js-dropdown-button>
+        <select class="product-options__section" data-style="select" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}" data-js-option-select{% if disable_auto_select %} data-disable-auto-select{% endif %} id="{{ option.name }}_bg">
+          <option selected="selected" disabled>Select {{ option.name | strip_alpha_characters }} </option>    
+          {%- for value in option.values -%}
+          {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+
+          <option style="background-image: url({{ value | handle | append: '.png' | asset_url }});" data-value="{% render 'product-get-options-strip-symbols' with value: value %}" value="{% render 'product-get-options-strip-symbols' with value: value %}"{% if disabled_value %} disabled="disabled"{% endif %}>{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}</option>
+          {% capture select_dropdown_html %}
+          {{ select_dropdown_html }}
+          {%if is_upholstery %}
+          {% assign option_values = value | handle %}
+
+          {% assign option_values = product.variants[option_values] %}
+          {% assign swatch_mage = option_values.metafields.Varint-back-image.Varint-back-image %}
+
+          <li data-option-title="{{ value | escape }}" class="ColorType {% if is_upholstery %}color {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+            <div class="tooltip" id="tooltip"><script type="text/javascript">var string = '{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}'; string = string.replace(/\d+/g, ''); document.write(string)</script></div>              
+            {% comment %}
+            <span{% if active_value %} class="selected"{% endif %} data-image_swatch="{%if is_upholstery %}{{swatch_mage}}{%endif%}" style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value | handle | append: '.png' | asset_url }})" data-value="{% render 'product-get-options-strip-symbols' with value: value %}"{% if disabled_value %} disabled="disabled"{% endif %} {{ trigger_attr }}></span>
+            {% endcomment %}
+
+            <span{% if active_value %} class="selected"{% endif %} data-image_swatch="{%if is_upholstery %}{{swatch_mage}}{%endif%}" style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value | handle | append: '.png' | asset_url }})" data-value="{% render 'product-get-options-strip-symbols' with value: value %}"{% if disabled_value %} disabled="disabled"{% endif %} {{ trigger_attr }}></span>
+            {% else %}
+            {% assign option_values = product.variants[forloop.index0] %}
+            {% assign swatch_mage = option_values.metafields.Varint-back-image.Varint-back-image %}
+
+            <span{% if active_value %} class="selected"{% endif %} data-image_swatch="{%if is_upholstery %}{{swatch_mage}}{%endif%}" style="{%if is_upholstery %}background-image: url({{ swatch_mage }}); {% endif %}" data-value="{% render 'product-get-options-strip-symbols' with value: value %}"{% if disabled_value %} disabled="disabled"{% endif %} {{ trigger_attr }}>{{ value | handle }}</span>
+            {% endif %}
+            {%if is_upholstery %}
+          </li>
+          {% endif %}
+
+          {% endcapture %}
+          {%- endfor -%}
+        </select>
+        <i class="d-none d-lg-block position-absolute right-0 mr-10" id="{{ option.name }}_icon">{% render 'icon-theme-229' %}</i>
+      </div>
+      <div class=" {%if is_upholstery %}swatch{% else %}select__dropdown dropdown position-lg-absolute d-none {% endif %} {% if select_dropdown_position == 'top' %}bottom{% else %}top{% endif %}-lg-100 left-lg-0" {%unless is_upholstery %} data-js-dropdown {%endunless%} data-js-select-dropdown{% if disable_auto_select %} data-dropdown-unselected{% endif %}>
+        {%unless is_upholstery %}<div class="px-15 pb-30 py-lg-15">{% endunless %}
+        {%if is_upholstery %}<h5>Select {{ option.name }}</h5><ul class="Color options">{% endif %}
+        {{ select_dropdown_html }}
+        {%if is_upholstery %}</ul>{% endif %}
+        {%unless is_upholstery %}</div>{% endunless %}
+      </div>
+      {% comment %}
+      {{is_upholstery}}
+      <div class="select__dropdown dropdown d-none position-lg-absolute {% if select_dropdown_position == 'top' %}bottom{% else %}top{% endif %}-lg-100 left-lg-0" data-js-dropdown data-js-select-dropdown{% if disable_auto_select %} data-dropdown-unselected{% endif %}>
+        <div class="px-15 pb-30 py-lg-15">
+          {{ select_dropdown_html }}
+        </div>
+      </div>
+      {% endcomment %}
+    </div>
+
+    <script>
+      function getval(sel)
+      {
+        alert(sel.value);
+      }
+    </script>
+
+    {%- else -%}
+    <div class="product-options__section d-flex flex-wrap" data-style="text" data-property="{% render 'product-get-options-strip-symbols' with value: option.name %}"{% if disable_auto_select %} data-disable-auto-select{% endif %}>
+      {%- for value in option.values -%}
+      {% include 'product-get-options-res-status' with option_index0: option_index0 %}
+      <div class="product-options__value product-options__value--text d-flex flex-center border cursor-pointer{% if disabled_value %} disabled{% endif %}{% if active_value %} active{% endif %}"
+           data-js-option-value
+           data-value="{% render 'product-get-options-strip-symbols' with value: value %}"
+           {{ trigger_attr }}
+           data-scale="2"
+           >{{ value | replace: '<', '&lt;' | replace: '>', '&gt;' }}</div>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+  {% endcapture %}
+  {%- if label_value -%}
+  {%- assign label_value_replace = 'data-label-value>' | append: label_value -%}
+  {%- assign option_section_html = option_section_html | replace: 'data-label-value>', label_value_replace -%}
+  {%- endif -%}
+  {{ option_section_html }}
+  {%- endfor -%}
+</div>
+{%- endunless -%}
+{%- assign option_section_html = null -%}
+{%- assign change_history = false -%}
+{%- assign trigger = null -%}
+{%- assign trigger_id = null -%}
+<style>
+  .product-options__section .slick-track {
+    height: 50px;
+  }
+  .product-options__section.Color.options button.slick-arrow {
+    margin-top: 20px;
+  }  
+  .swatch>* {
+    opacity: 1;
+  }
+  .swatch span{
+    cursor:pointer;
+  }
+  .select_dropdown.swatch_options {
+    display: none;
+  }
+  /* Hiding the drop-downs. */
+  #product-variants, .selector-wrapper { display:none; }
+  ul:not(.list-unstyled):not([list-unstyled]) li {
+    padding-left: 0;
+  }
+  /* Style the swatches */
+  #swatches { margin:20px 0 0; }
+  .swatch { margin:15px 0; }
+  .swatch ul { list-style-type:none; margin:0; padding:0; }
+  .swatch .ColorType {
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    display:-moz-inline-stack;
+    display:inline-block;
+    zoom:1;
+    *display:inline;
+    padding:0;
+    background-color:#ddd;
+    margin:0px 5px 10px 0;
+    cursor:pointer;
+    border: #DDD 1px solid !important;
+    position:relative;
+    text-transform:uppercase;
+    font-size:13px;
+  }
+
+  .swatch li span { display:block; margin:5px 10px; }
+  .swatch .color { width:80px; height:55px; margin-top: 0px; z-index: 9;}
+  .swatch .color .product-options__value,.swatch .color span { width:100%; height:100%; margin:0; }
+
+  .swatch .options li.soldout { cursor:default; }
+  .crossed-out { position:absolute; width:100%; height:100%; left:0; right:0; }
+  .swatch li .crossed-out { display:none; }
+  .swatch .soldout .crossed-out { display:block; }
+  .swatch .soldout span {
+    filter: alpha(opacity=60); /* internet explorer */
+    -khtml-opacity: 1;      /* khtml, old safari */
+    -moz-opacity: 1;       /* mozilla, netscape */
+    opacity: 1;           /* fx, safari, opera */
+  }
+
+  /* Styling selected swatch */
+  /* Darker border and slightly raised */
+  .swatch .selected,.swatch .active {
+    border:#999 2px solid !important;
+    -webkit-box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    0px 0px 11px 0px rgba(50, 50, 50, 1);
+    box-shadow:         0px 0px 11px 0px rgba(50, 50, 50, 1);
+  }
+
+  /* Bring on animated tooltips */
+  .swatch .options li,.swatch .options .ColorType {
+    -webkit-transform: translateZ(0); /* webkit flicker fix */
+    -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+  }
+
+  /* Tooltips */
+  .swatch .tooltip {
+    /* Color and text alignment */
+    line-height: 16px;
+    text-align:center;
+    background:gray;
+    color:#fff;
+    font-size: 12px;
+    bottom: 92%;
+    padding: 5px 5px;
+    /* Positioning */
+    display:block;
+    position:absolute;
+    width:100px;
+    left:0px;
+    margin-bottom:15px;
+    /* Make it invisible by default */
+    filter:alpha(opacity=0);
+    -khtml-opacity: 0;
+    -moz-opacity: 0;
+    opacity:0;
+    visibility:hidden;
+    /* Animations */
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    -ms-transform: translateY(10px);
+    -o-transform: translateY(10px);
+    transform: translateY(10px);
+    -webkit-transition: all .25s ease-out;
+    -moz-transition: all .25s ease-out;
+    -ms-transition: all .25s ease-out;
+    -o-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+    -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  }
+  /* This bridges the gap so you can mouse into the tooltip without it disappearing */
+  .swatch .tooltip:before {
+    bottom:-20px;
+    content:" ";
+    display:block;
+    height:20px;
+    left:0;
+    position:absolute;
+    width:100%;
+  }
+  /* CSS Triangle */
+  .swatch .tooltip:after {
+    border-left: solid transparent 10px;
+    border-right: solid transparent 10px;
+    border-top: solid gray 10px;
+    bottom: -10px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -13px;
+    position: absolute;
+    width: 0;
+  }
+  /* Tooltip visible */
+  .swatch .ColorType:hover .tooltip {
+    filter: alpha(opacity=100);
+    -khtml-opacity: 1;
+    -moz-opacity: 1;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+
+
+  .default_option{
+    border: 1px #d5d4d4 solid;
+    padding:  3px 5px;
+    width: 330px;
+    background-image: url('https://cdn.shopify.com/s/files/1/0311/1453/t/3/assets/arrow.gif?2915');
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    font-size: 12px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+  }
+  .OptionContainer{
+    position: relative;
+  }
+  .current_option{
+    display: none;
+    width: 330px;
+    height: auto;
+    border: 1px #d5d4d4 solid;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    overflow: auto;
+    padding: 5px 5px 20px 5px;
+    position: absolute;
+    left: 0;
+    top: -1px;
+    z-index: 100;
+    background-color: #fff;
+  }
+
+  ul.OptionList{width: 100%; padding: 0; margin: 0; font-size: 12px;}
+  ul.OptionList li.ProductOption{background-color: #fff; padding: 2px 5px; margin: 5px; cursor: default;}
+  ul.OptionList li.ProductOption:hover{background-color: #74cbe8;-webkit-border-radius:5px;-moz-border-radius:5px; border-radius:5px;}
+  ul.OptionList li.selected {background-color:#74cbe8 !important; border: 0px !important;-webkit-border-radius:5px;-moz-border-radius:5px; border-radius:5px;-webkit-box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 255);
+    -moz-box-shadow:    0px 0px 0px 0px rgba(255, 255, 255, 255);
+    box-shadow:         0px 0px 0px 0px rgba(255, 255, 255, 255);}
+
+</style>

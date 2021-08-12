@@ -1,0 +1,335 @@
+<section id="why_us_section" class="mt-100 mb-100 pb-100">
+  <div class="container">
+    <div class="row tabs_head_row">
+      
+      {% comment %}
+      {% assign tabs = page.handle %}
+      {% for block in section.blocks %}
+        <div class="col tabs_head_col">
+         {{ block.settings.tabs }}
+        </div>
+      
+      {% assign page_content = block.settings.tabs %}  
+	        	{{ pages[page_content].content }}
+      {% endfor %}
+      {% endcomment %}
+      
+      <div class="col-md-12 nav_tabs">
+        <ul class="nav nav-tabs" role="tablist">
+      {% for block in section.blocks %}
+      <li>
+          <a href="{% if block.type == 'our_customers' %} {{ block.settings.customer_tabs_link }} {% else %}#{{ block.settings.tabs_link }} {% endif %}" {% if block.type == 'our_customers' %} {% else %} role="tab" data-toggle="tab" {% endif %}>
+              {{ block.settings.tabs_head }}
+          </a>
+      </li>
+      {% endfor %}
+      </ul>
+      </div>
+      
+      <div class="col-md-12 tab-content mt-100">
+        
+      {% for block in section.blocks %}
+        {% if block.type == 'our_story' %}
+        
+           {% include 'our_story_snippet' %}
+        
+        {% elsif block.type == 'why_us' %}
+        
+           {% include 'why_us_snippet' %}
+        
+        {% elsif block.type == 'our_customers' %}
+        
+           {% include 'our_customers' %}
+        
+        {% endif %}
+      {% endfor %}
+      </div>
+      
+    
+      
+      
+    </div>
+  </div>
+
+</section>
+
+
+
+<script>
+
+  $(document).ready(function(){
+    $(".tab-content .tab-pane:nth-child(1)").addClass('active');
+    $(".tab-content .tab-pane:nth-child(1)").addClass('in');
+    $(".nav-tabs li:nth-child(1)").addClass('active');
+  
+    $(".mob_why_us_tab a").click(function(){
+      
+      
+      var child = $(this).siblings("p"),
+         rest = $('p:visible').not(child),
+         main = $(this),
+         notmain = $(".mob_why_us_tab a").not(main);
+
+     child.slideToggle(); //toggle current one
+     rest.slideUp(); //close the rest
+     main.toggleClass('active') ;
+     notmain.removeClass('active')
+      
+    });
+    
+  });
+  
+
+</script>
+
+
+{% schema %}
+  {
+    "name": "Why Us Section",
+    "max_blocks": 3,
+    "settings": [
+          ],
+"blocks": [
+      {
+        "type": "our_story",
+        "name": "Our Story Tab",
+        "settings": [
+          {
+            "id": "tabs_head",
+            "type": "text",
+            "label": "Tabs Head"
+          },
+          {
+            "id": "tabs_link",
+            "type": "text",
+            "label": "Tabs Link",
+            "info": "Please don't use space here.Use underscore(_) at the place of space."
+          },
+          {
+            "id": "tabs_left_content",
+            "type": "textarea",
+            "label": "Tabs Left Content"
+          },
+          {
+            "id": "tabs_left_content_signature",
+            "type": "image_picker",
+            "label": "Tabs Left Content Signature"
+          },
+          {
+            "id": "tabs_right_image",
+            "type": "image_picker",
+            "label": "Tabs Right Image"
+          },
+          {
+            "id": "tabs_right_image_btm_content",
+            "type": "textarea",
+            "label": "Tabs Right Image Bottom Content"
+          }
+        ]
+      },
+      {
+        "type": "why_us",
+        "name": "Why Tabs",
+        "settings": [
+          {
+            "id": "tabs_head",
+            "type": "text",
+            "label": "Tabs Head"
+          },
+          {
+            "id": "tabs_link",
+            "type": "text",
+            "label": "Tabs Link"
+          },
+          {
+            "id": "inner_tabs_head",
+            "type": "text",
+            "label": "Inner Tabs heading"
+          },
+          {
+            "id": "inner_tabs_link",
+            "type": "text",
+            "label": "Inner Tabs Link"
+          },
+          {
+            "id": "inner_tabs_desc",
+            "type": "html",
+            "label": "Inner Tabs Description"
+          },
+          {
+            "id": "inner_tabs_head2",
+            "type": "text",
+            "label": "Inner Tabs heading2"
+          },
+          {
+            "id": "inner_tabs_link2",
+            "type": "text",
+            "label": "Inner Tabs Link2"
+          },
+          {
+            "id": "inner_tabs_desc2",
+            "type": "html",
+            "label": "Inner Tabs Description2"
+          },
+          {
+            "id": "inner_tabs_head3",
+            "type": "text",
+            "label": "Inner Tabs heading3"
+          },
+          {
+            "id": "inner_tabs_link3",
+            "type": "text",
+            "label": "Inner Tabs Link3"
+          },
+          {
+            "id": "inner_tabs_desc3",
+            "type": "html",
+            "label": "Inner Tabs Description3"
+          },
+          {
+            "id": "inner_tabs_head4",
+            "type": "text",
+            "label": "Inner Tabs heading4"
+          },
+          {
+            "id": "inner_tabs_link4",
+            "type": "text",
+            "label": "Inner Tabs Link4"
+          },
+          {
+            "id": "inner_tabs_desc4",
+            "type": "html",
+            "label": "Inner Tabs Description4"
+          },
+          {
+            "id": "inner_tabs_head5",
+            "type": "text",
+            "label": "Inner Tabs heading5"
+          },
+          {
+            "id": "inner_tabs_link5",
+            "type": "text",
+            "label": "Inner Tabs Link5"
+          },
+          {
+            "id": "inner_tabs_desc5",
+            "type": "html",
+            "label": "Inner Tabs Description5"
+          },
+          {
+            "id": "inner_tabs_head6",
+            "type": "text",
+            "label": "Inner Tabs heading6"
+          },
+          {
+            "id": "inner_tabs_link6",
+            "type": "text",
+            "label": "Inner Tabs Link6"
+          },
+          {
+            "id": "inner_tabs_desc6",
+            "type": "html",
+            "label": "Inner Tabs Description6"
+          },
+          {
+            "id": "inner_tabs_head7",
+            "type": "text",
+            "label": "Inner Tabs heading7"
+          },
+          {
+            "id": "inner_tabs_link7",
+            "type": "text",
+            "label": "Inner Tabs Link7"
+          },
+          {
+            "id": "inner_tabs_desc7",
+            "type": "html",
+            "label": "Inner Tabs Description7"
+          },
+          {
+            "id": "inner_tabs_head8",
+            "type": "text",
+            "label": "Inner Tabs heading8"
+          },
+          {
+            "id": "inner_tabs_link8",
+            "type": "text",
+            "label": "Inner Tabs Link8"
+          },
+          {
+            "id": "inner_tabs_desc8",
+            "type": "html",
+            "label": "Inner Tabs Description8"
+          },
+          {
+            "id": "inner_tabs_head9",
+            "type": "text",
+            "label": "Inner Tabs heading9"
+          },
+          {
+            "id": "inner_tabs_link9",
+            "type": "text",
+            "label": "Inner Tabs Link9"
+          },
+          {
+            "id": "inner_tabs_desc9",
+            "type": "html",
+            "label": "Inner Tabs Description9"
+          },
+          {
+            "id": "inner_tabs_head10",
+            "type": "text",
+            "label": "Inner Tabs heading10"
+          },
+          {
+            "id": "inner_tabs_link10",
+            "type": "text",
+            "label": "Inner Tabs Link10"
+          },
+          {
+            "id": "inner_tabs_desc10",
+            "type": "html",
+            "label": "Inner Tabs Description10"
+          },
+          {
+            "id": "inner_tabs_head11",
+            "type": "text",
+            "label": "Inner Tabs heading11"
+          },
+          {
+            "id": "inner_tabs_link11",
+            "type": "text",
+            "label": "Inner Tabs Link11"
+          },
+          {
+            "id": "inner_tabs_desc11",
+            "type": "html",
+            "label": "Inner Tabs Description11"
+          }
+         ]
+      },
+      {
+        "type": "our_customers",
+        "name": "Customer Tabs",
+        "settings": [
+          {
+            "id": "tabs_head",
+            "type": "text",
+            "label": "Tabs Head"
+          },
+          {
+            "id": "customer_tabs_link",
+            "type": "url",
+            "label": "Customer Tab Link"
+          }
+         ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

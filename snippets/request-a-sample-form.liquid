@@ -1,0 +1,142 @@
+{% capture randValue %}input_{{ 'now' | date: "%H%M%S%N"}}{% endcapture %}
+
+<script src="https://cdn.jotfor.ms/static/prototype.forms.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/static/jotform.forms.js?3.3.1141" type="text/javascript"></script>
+<script type="text/javascript"> JotForm.init(function(){ setTimeout(function() { $('input_10').hint('Form Type'); }, 20);
+                                                        JotForm.initCaptcha('{{randValue}}');
+                                                                            $('{{randValue}}_reload').observe('click',function(){ JotForm.reloadCaptcha('{{randValue}}'); }); JotForm.alterTexts({"alphabetic":"This field can only contain letters","alphanumeric":"This field can only contain letters and numbers.","ccDonationMinLimitError":"Minimum amount is {minAmount} {currency}","ccInvalidCVC":"CVC number is invalid.","ccInvalidExpireDate":"Expire date is invalid.","ccInvalidNumber":"Credit Card Number is invalid.","ccMissingDetails":"Please fill up the Credit Card details.","ccMissingDonation":"Please enter numeric values for donation amount.","ccMissingProduct":"Please select at least one product.","characterLimitError":"Too many Characters. The limit is","characterMinLimitError":"Too few characters. The minimum is","confirmClearForm":"Are you sure you want to clear the form?","confirmEmail":"E-mail does not match","currency":"This field can only contain currency values.","cyrillic":"This field can only contain cyrillic characters","dateInvalid":"This date is not valid. The date format is {format}","dateInvalidSeparate":"This date is not valid. Enter a valid {element}.","dateLimited":"This date is unavailable.","disallowDecimals":"Please enter a whole number.","email":"Enter a valid e-mail address","fillMask":"Field value must fill mask.","freeEmailError":"Free email accounts are not allowed","generalError":"There are errors on the form. Please fix them before continuing.","generalPageError":"There are errors on this page. Please fix them before continuing.","gradingScoreError":"Score total should only be less than or equal to","incompleteFields":"There are incomplete required fields. Please complete them.","inputCarretErrorA":"Input should not be less than the minimum value:","inputCarretErrorB":"Input should not be greater than the maximum value:","lessThan":"Your score should be less than or equal to","maxDigitsError":"The maximum digits allowed is","maxSelectionsError":"The maximum number of selections allowed is","minSelectionsError":"The minimum required number of selections is","multipleFileUploads_emptyError":"{file} is empty, please select files again without it.","multipleFileUploads_fileLimitError":"Only {fileLimit} file uploads allowed.","multipleFileUploads_minSizeError":"{file} is too small, minimum file size is {minSizeLimit}.","multipleFileUploads_onLeave":"The files are being uploaded, if you leave now the upload will be cancelled.","multipleFileUploads_sizeError":"{file} is too large, maximum file size is {sizeLimit}.","multipleFileUploads_typeError":"{file} has invalid extension. Only {extensions} are allowed.","numeric":"This field can only contain numeric values","pastDatesDisallowed":"Date must not be in the past.","pleaseWait":"Please wait...","required":"This field is required1.","requireEveryCell":"Every cell is required.","requireEveryRow":"Every row is required.","requireOne":"At least one field required.","submissionLimit":"Sorry! Only one entry is allowed. Multiple submissions are disabled for this form.","uploadExtensions":"You can only upload following files:","uploadFilesize":"File size cannot be bigger than:","uploadFilesizemin":"File size cannot be smaller than:","url":"This field can only contain a valid URL","wordLimitError":"Too many words. The limit is","wordMinLimitError":"Too few words. The minimum is"}); JotForm.clearFieldOnHide="disable"; JotForm.submitError="jumpToFirstError"; /*INIT-END*/
+                                                                            }); JotForm.prepareCalculationsOnTheFly([null,{"name":"heading","qid":"1","text":"Heading","type":"control_head"},{"name":"send","qid":"2","text":"send","type":"control_button"},{"name":"name","qid":"3","text":"","type":"control_fullname"},{"name":"email","qid":"4","text":"Email","type":"control_email"},{"name":"phoneNumber","qid":"5","text":"Phone Number","type":"control_phone"},{"name":"email6","qid":"6","text":"Email","type":"control_email"},{"name":"name7","qid":"7","text":"Name","type":"control_fullname"},{"name":"clickTo","qid":"8","text":"Click to edit...","type":"control_textarea"},{"name":"enterThe","qid":"9","text":"Enter the message as it&#039;s shown","type":"control_captcha"},{"name":"typeA","qid":"10","text":"Form Type","type":"control_textbox"}]);</script>
+
+{{ 'formCss.css' | asset_url | stylesheet_tag }}
+{{ 'nova.css' | asset_url | stylesheet_tag }}
+{{ 'jotforms.css' | asset_url | stylesheet_tag }}
+<link type="text/css" media="print" rel="stylesheet" href="https://cdn.jotfor.ms/css/printForm.css?3.3.1141" />
+
+
+
+
+<style type="text/css">
+  .form-label-left {
+    width: 150px !important;
+  }
+  .form-line {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .form-label-right {
+    width: 150px !important;
+  }
+  .form-all {
+    width: 690px;
+    color: #555 !important;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, sans-serif;
+    font-size: 14px;
+  }
+</style>
+<style type="text/css" id="form-designer-style">
+  /* Injected CSS Code */
+
+  .form-label.form-label-auto {
+    display: block;
+    float: none;
+    text-align: left;
+    width: inherit;
+  } /*__INSPECT_SEPERATOR__*/ /* Injected CSS Code */
+</style>
+<form class="jotform-form" action="https://submit.jotformeu.com/submit/72042055760449/" method="post" name="form_72042055760449" id="72042055760449" accept-charset="utf-8">
+  <input type="hidden" name="formID" value="72042055760449" />
+  <div class="form-all">
+    <ul class="form-section page-section">
+      <li id="cid_1" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group ">
+          <div class="header-text httal htvam">
+            <div id="subHeader_1" class="form-subHeader form_title"> Request a Sample </div>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_fullname" id="id_3">
+        <div id="cid_3" class="form-input-wide jf-required">
+          <div data-wrapper-react="true"> <span class="form-sub-label-container" style="vertical-align:top;">
+            <input type="text" id="first_3" name="q3_name[first]" class="form-textbox validate[required]" size="10" value="" data-component="first" placeholder="First Name*" required />
+            </span></div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_fullname" id="id_7">
+        <div id="cid_7" class="form-input-wide jf-required">
+          <div data-wrapper-react="true">
+            <span class="form-sub-label-container" style="vertical-align:top;">
+              <input type="text" id="last_7" name="q7_name7[last]" class="form-textbox" size="15" value="" data-component="last" placeholder="Last Name" />
+            </span> </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_email" id="id_4">
+        <div id="cid_4" class="form-input-wide jf-required"> 
+          <span class="form-sub-label-container" style="vertical-align:top;">
+            <input type="email" id="input_4" name="q4_email" class="form-textbox validate[required, Email]" size="30" value="" data-component="email" required placeholder="Email*" />
+          </span> 
+        </div>
+      </li>
+      <li class="form-line" data-type="control_email" id="id_6">
+        <div id="cid_6" class="form-input-wide jf-required"> <span class="form-sub-label-container" style="vertical-align:top;" >
+          <input type="email" id="input_6" name="q6_email6" class="form-textbox validate[required, Email]" size="30" value="" data-component="email" required placeholder="Confirm Email*" />
+          </span> </div>
+      </li>
+
+      <li class="form-line" data-type="control_phone" id="id_5">
+        <div id="cid_5" class="form-input-wide jf-required">
+
+          <div data-wrapper-react="true"> 
+            <span class="form-sub-label-container" style="vertical-align:top;">
+              <input type="tel" id="input_5_phone" name="q5_phoneNumber[phone]" class="form-textbox" size="8" value="" data-component="phone" placeholder="Phone Number" />
+            </span> 
+          </div>
+        </div>
+      </li>
+
+      <li class="form-line" data-type="control_textarea" id="id_8">
+        <label class="form-label form-label-top form-label-auto" id="label_8" for="input_8"> </label>
+        <div id="cid_8" class="form-input-wide jf-required">
+          <textarea id="input_8" class="form-textarea validate[required]" name="q8_clickTo" cols="40" rows="6" data-component="textarea" placeholder="Message*" required></textarea>
+        </div>
+      </li>
+      <li class="form-line jf-required" data-type="control_captcha" id="id_9">
+        <div id="cid_9" class="form-input-wide jf-required captchabar">
+          <label class="form-label form-label-top form-label-auto" id="label_9" for="{{randValue}}"> Enter the message shown </label>
+
+          <div class="form-captcha" data-component="captcha">
+            <label for="{{randValue}}"> <img alt="Captcha - Reload if not displayed" id="{{randValue}}_captcha" class="form-captcha-image" style="background:url(https://cdn.jotfor.ms/images/loader-big.gif) no-repeat center;" src="https://cdn.jotfor.ms/images/blank.gif" width="150" height="41" /> </label>
+            <div style="white-space:nowrap;">
+              <input type="text" id="{{randValue}}" class="form-textbox validate[required]" name="captcha" style="width:130px;" required />
+              <img src="https://cdn.jotfor.ms/images/reload.png" alt="Reload" style="cursor:pointer;vertical-align:middle;" id="{{randValue}}_reload" />
+              <input type="hidden" name="captcha_id" id="{{randValue}}_captcha_id" value="0" />
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_textbox" id="id_10">
+        <div id="cid_10" class="form-input-wide jf-required">
+          <input type="text" id="input_10" name="q10_typeA" data-type="input-textbox" class="form-textbox" size="20" value="" placeholder="Form Type" data-component="textbox" />
+        </div>
+      </li>
+      <li class="form-line" data-type="control_button" id="id_2">
+        <div class="error_msg"><p>*These fields are required</p></div>
+        <div id="cid_2" class="form-input-wide intra_button">
+          <div  class="form-buttons-wrapper form_btn">
+            <button id="input_2" type="submit" class="form-submit-button" data-component="button"> send </button>
+          </div>
+        </div>
+      </li>
+      <li style="display:none"> Should be Empty:
+        <input type="text" name="website" value="" />
+      </li>
+    </ul>
+  </div>
+  <script> JotForm.showJotFormPowered = "new_footer"; </script>
+  <input type="hidden" id="simple_spc" name="simple_spc" value="72042055760449" />
+  <script type="text/javascript"> document.getElementById("si" + "mple" + "_spc").value = "72042055760449-72042055760449"; </script>
+</form>
+<script type="text/javascript">JotForm.ownerView=true;</script><script type="text/javascript">JotForm.forwardToEu=true;</script>
+
+<script>
+
+</script>

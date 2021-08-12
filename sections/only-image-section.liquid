@@ -1,0 +1,24 @@
+{% if product.metafields.only_image.only_image != blank %}
+<div class="row">
+  <div class="col-md-12 only_image_main">
+    <img src="{{product.metafields.only_image.only_image}}">
+  </div>
+</div>
+{% endif %}
+<style>
+.only_image_main img {
+    width: 100%;
+}
+</style>
+{% schema %}
+  {
+    "name": "Only image section",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

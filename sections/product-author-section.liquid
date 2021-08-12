@@ -1,0 +1,36 @@
+{% if product.metafields.Show_author_section.Show_author_section == 'true' %}
+<section id="product-author-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 author_main_title">
+        <h3 class="mb-30 text-center">{{product.metafields.author_title.author_title}}</h3>
+        <h2 class="mb-50 text-center">{{product.metafields.author_name.author_name}}</h2>
+      </div>
+      {% for value in product.metafields.author_image.author_image %}
+      <div class="col-md-4 author_image">
+        <img src="{{ value }}">
+      </div>
+      {% endfor %}
+      <div class="col-md-12 author_desc">
+        <p class="mt-50 text-center">{{product.metafields.author_description.author_description}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+
+  {
+    "name": "Product author section",
+    "settings": []
+  
+  }
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

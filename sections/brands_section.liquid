@@ -1,0 +1,47 @@
+
+
+<div class="row flex-center">
+  
+  {% for block in section.blocks %}
+  {% if block.settings.brand_img != blank %}
+   <div class="col brands">
+     <a href="{{ block.settings.brand_img_link }}"> 
+       <img src="{{ block.settings.brand_img | img_url: 'master' }}">
+     </a>
+   </div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Brands Section",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "image_picker",
+        "name": "Brands",
+        "settings": [
+          {
+            "id": "brand_img",
+            "type": "image_picker",
+            "label": "Brand Image"
+          },
+          {
+            "id": "brand_img_link",
+            "type": "url",
+            "label": "Brand Url"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

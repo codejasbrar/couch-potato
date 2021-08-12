@@ -1,0 +1,329 @@
+<style>
+
+/* Hiding the drop-downs. */
+#product-variants, .selector-wrapper { display:none; }
+ul:not(.list-unstyled):not([list-unstyled]) li {
+    padding-left: 0;
+}
+/* Style the swatches */
+#swatches { margin:20px 0 0; }
+.swatch { margin:15px 0; }
+.swatch ul { list-style-type:none; margin:0; padding:0; }
+.swatch li.ColorType {
+  /* Rounded corners */
+  -webkit-border-radius:2px;
+  -moz-border-radius:2px;
+  border-radius:2px;
+  /* Cross-browser inline-block */
+  display:-moz-inline-stack;
+  display:inline-block;
+  zoom:1;
+  *display:inline;
+  /* Content must stretch all the way to borders */
+  padding:0;
+  /* Background color */
+  background-color:#ddd;
+  /* Spacing between buttons */
+  margin:0px 5px 10px 0;
+  /* Fake that those are buttons, i.e. clicky */
+  cursor:pointer;
+  /* The border when the button is not selected */
+  border: #DDD 1px solid !important;
+  /* To position the sold out graphic and tooltip */
+  position:relative;
+  /* Text styling */
+  text-transform:uppercase;
+  font-size:13px;
+}
+
+/* Styles for the text or color container within the swatch button */
+.swatch li span { display:block; margin:5px 10px; }
+/* Special styles for color swatches */
+/* They don't contain text so they need to have a width and height */
+.swatch li.color { width:80px; height:55px; }
+/* The container of the image/color must be as big as its container */
+.swatch li.color span { width:100%; height:100%; margin:0; }
+
+/* Styling sold out options */
+.swatch ul.options li.soldout { cursor:default; }
+/* That's the image with the cross in it */
+.crossed-out { position:absolute; width:100%; height:100%; left:0; right:0; }
+.swatch li .crossed-out { display:none; }
+.swatch li.soldout .crossed-out { display:block; }
+.swatch li.soldout span {
+  filter: alpha(opacity=60); /* internet explorer */
+  -khtml-opacity: 0.6;      /* khtml, old safari */
+  -moz-opacity: 0.6;       /* mozilla, netscape */
+  opacity: 0.6;           /* fx, safari, opera */
+}
+
+/* Styling selected swatch */
+/* Darker border and slightly raised */
+.swatch li.selected {
+  border:#999 2px solid !important;
+  -webkit-box-shadow: 0px 0px 11px 0px rgba(50, 50, 50, 1);
+-moz-box-shadow:    0px 0px 11px 0px rgba(50, 50, 50, 1);
+box-shadow:         0px 0px 11px 0px rgba(50, 50, 50, 1);
+}
+
+/* Bring on animated tooltips */
+.swatch .options li {
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+/* Tooltips */
+.swatch .tooltip {
+  /* Color and text alignment */
+  line-height: 16px;
+  text-align:center;
+  background:gray;
+  color:#fff;
+  font-size: 12px;
+  bottom: 92%;
+  padding: 10px 5px;
+  /* Positioning */
+  display:block;
+  position:absolute;
+  width:100px;
+  left:-15px;
+  margin-bottom:15px;
+  /* Make it invisible by default */
+  filter:alpha(opacity=0);
+  -khtml-opacity: 0;
+  -moz-opacity: 0;
+  opacity:0;
+  visibility:hidden;
+  /* Animations */
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.swatch .tooltip:before {
+  bottom:-20px;
+  content:" ";
+  display:block;
+  height:20px;
+  left:0;
+  position:absolute;
+  width:100%;
+}
+/* CSS Triangle */
+.swatch .options li .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  /* the color below  must match the color of the
+  background of your tooltip */
+  border-top: solid gray 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 50%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+/* Tooltip visible */
+.swatch li:hover .tooltip {
+  filter: alpha(opacity=100);
+  -khtml-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+  
+
+.default_option{
+	border: 1px #d5d4d4 solid;
+	padding:  3px 5px;
+	width: 330px;
+    background-image: url('https://cdn.shopify.com/s/files/1/0311/1453/t/3/assets/arrow.gif?2915');
+    background-repeat: no-repeat;
+	background-position: 98% 50%;
+    font-size: 12px;
+  	-webkit-border-radius:5px;
+  	-moz-border-radius:5px;
+  	border-radius:5px;
+}
+.OptionContainer{
+	position: relative;
+}
+.current_option{
+	display: none;
+	width: 330px;
+	height: auto;
+	border: 1px #d5d4d4 solid;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+	overflow: auto;
+	padding: 5px 5px 20px 5px;
+	position: absolute;
+	left: 0;
+	top: -1px;
+	z-index: 100;
+    background-color: #fff;
+}
+
+  ul.OptionList{width: 100%; padding: 0; margin: 0; font-size: 12px;}
+  ul.OptionList li.ProductOption{background-color: #fff; padding: 2px 5px; margin: 5px; cursor: default;}
+  ul.OptionList li.ProductOption:hover{background-color: #74cbe8;-webkit-border-radius:5px;-moz-border-radius:5px; border-radius:5px;}
+  ul.OptionList li.selected {background-color:#74cbe8 !important; border: 0px !important;-webkit-border-radius:5px;-moz-border-radius:5px; border-radius:5px;-webkit-box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 255);
+-moz-box-shadow:    0px 0px 0px 0px rgba(255, 255, 255, 255);
+box-shadow:         0px 0px 0px 0px rgba(255, 255, 255, 255);}
+
+</style>
+
+
+
+{% comment %}
+{% for option in product.options %}
+{% endfor %}
+{% endcomment %}
+
+  {% assign option_handle = option.name | handle %}
+  {% assign option_index = forloop.index0 %}
+  {% assign is_color = false %}
+  {% capture downcased_option %}{{ option.name | downcase }}{% endcapture %}
+{% if downcased_option == 'color' or downcased_option == 'colour' or downcased_option == 'finishes' or downcased_option == 'top finish' or downcased_option == 'tonus fabric' or downcased_option == 'colour finishes' or downcased_option == 'colour (shell)' or downcased_option == 'hopsak - fabric' or downcased_option == 'leather' or downcased_option == 'colours (tonus fabric)' or downcased_option == 'base frame' or downcased_option == 'backrest and seat' or downcased_option == 'plywood' or downcased_option == 'base' or downcased_option == 'table top' or downcased_option == 'shell' or downcased_option == 'fabric' or downcased_option == 'fabric colour' or downcased_option == 'leather colour' or downcased_option == 'frame/seat colour' or downcased_option == 'seat/back colour' or downcased_option == 'top - structure colour' or downcased_option == 'top colour' or downcased_option == 'structure-cushion colour' or downcased_option == 'top-leg colour' or downcased_option == 'finish3' or downcased_option == 'upholstery1' or downcased_option == 'acqua leather' or downcased_option == 'cane or upholstery' or downcased_option == 'frame3' or downcased_option == 'frame upholstery1' or downcased_option == 'shell upholstery1' or downcased_option == 'cushion upholstery1' or downcased_option == 'frame3 colour' or downcased_option == 'wood1' or downcased_option == 'case1' or downcased_option == 'top5' or downcased_option == 'finish5' or downcased_option == 'armrests1' or downcased_option == 'seat upholstery1' or downcased_option == 'outer upholstery1' or downcased_option == 'inner shell colour' or downcased_option == 'chair colour1' or downcased_option == 'front upholstery1' or downcased_option == 'shell colour1' or downcased_option == 'design' or downcased_option == 'shell finish1' or downcased_option == 'seat and base finish1' or downcased_option == 'leather colour1' or downcased_option == 'base finish1' or downcased_option == 'seat colour1' or downcased_option == 'frame colour1' or downcased_option == 'backrest and seat colour1' or downcased_option =='back/armrest colour1' or downcased_option =='frame1' or downcased_option =='Seat Colour1' or downcased_option =='seat/leg finish1' or downcased_option =='diffuser colour1' or downcased_option =='cushion1' or downcased_option =='seat finish1' or downcased_option =='frame and top1' or downcased_option =='seat/reverse of seat colour1' or downcased_option =='wood type1' or downcased_option =='wood top1' or downcased_option =='back1' or downcased_option =='colour (frame/top)' or downcased_option =='colour (seat and legs/back)' or downcased_option =='cushion colour1' or downcased_option =='colour (legs/top)' or downcased_option =='colour (frame/seat and legs)' or downcased_option =='colour (joints and top/frame)' or downcased_option =='colour (seat/legs)' or downcased_option =='colour (frame/slats)' or downcased_option =='colour (joint and screw)'%}
+    {% assign is_color = true %}
+  {% endif %}
+{{downcased_option}}
+{{is_color}}
+  <div class="swatch clearfix">
+    
+    
+    <h5>Select {% if option contains '2' %}{{ option | remove: '2' }}{% elsif option contains '3' %}{{ option | remove: '3' }}{% elsif option contains '1' %}{{ option | remove: '1' }}{% elsif option contains '4' %}{{ option | remove: '4' }}{% elsif option contains '5' %}{{ option | remove: '5' }}{% elsif option contains '6' %}{{ option | remove: '6' }}{% elsif option contains '7' %}{{ option | remove: '7' }}{% elsif option contains '8' %}{{ option | remove: '8' }}{% elsif option contains '9' %}{{ option | remove: '9' }}{% elsif option contains '0' %}{{ option | remove: '0' }}{% else %}{{ option }}{% endif %}</h5>
+     
+    
+    {% if is_color %}
+		<ul class="Color options">
+	{% else %}   
+          <div class="default_option" id="default_option_{{ option_index }}" style="text-transform:uppercase;font-family: {{ settings.regular_google_webfont_font | replace: '+', ' ' }}">{{ product.variants[option_index].options[option_index] | replace: 'ÌÎÌ_ÌÎ_ÌÎÌ__ÌÎÌ_ÌÎ_ÌÎÌ_?', '⌀' }}</div>
+          <div class="OptionContainer">
+				<div class="current_option" id="current_option_{{ option_index }}" style="text-transform:uppercase;">
+					<ul class="OptionList">
+	{% endif %}
+	
+    {% assign values = '' %}
+    {% for variant in product.variants %}
+      {% assign value = variant.options[option_index] %}
+      {% capture wrapped_value %},{{ value }},{% endcapture %}
+      {% unless values contains wrapped_value %}
+       
+       {% if is_color %}
+        <li data-option-title="{{ value | escape }}" class="ColorType {% if is_color %}color {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+        <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
+       {% else %}
+          <li data-option-title="{{ value | escape }}" class="ProductOption">
+       {% endif %}
+      
+        {% if is_color %}
+            <div class="tooltip" id="tooltip"><script type="text/javascript">var string = '{{ value }}'; string = string.replace(/\d+/g, ''); document.write(string)</script></div>
+        {% endif %}
+        {% if is_color %}
+        <span style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value | handle | append: '.png' | asset_url }})"></span>
+        {% else %}
+            {{ value | replace: 'ÌÎÌ_ÌÎ_ÌÎÌ__ÌÎÌ_ÌÎ_ÌÎÌ_?', '⌀' }}
+        {% endif %}
+      </li>
+      {% capture values %}{{ values }}{{ wrapped_value }}{% endcapture %}
+      {% endunless %}
+      {% if variant.available %}
+      <script>
+        jQuery('.options:eq({{ option_index }}) li.{{ value | handle }}').removeClass('soldout').addClass('available');
+      </script>
+      {% endif %}
+    {% endfor %}
+
+
+    {% if is_color %}
+		</ul>
+	{% else %}
+              </ul>                  
+          </div>
+      </div>
+	{% endif %}
+                      
+                  
+  </div><!-- .swatch -->
+
+<script type="text/javascript">
+    $("#default_option_{{ option_index }}").click(function(){
+      $("#current_option_{{ option_index }}").slideDown();
+    });
+    
+    $("#current_option_{{ option_index }} li").click(function(event){
+      $("#default_option_{{ option_index }}").html($(this).text());
+      $("#current_option_{{ option_index }}").slideUp();
+    });
+  
+    $(document).mousedown(function() {
+      $("#current_option_{{ option_index }}").slideUp();
+    });
+  
+    
+</script>
+
+<!--<script type="text/javascript">
+    $("#default_option_{{ option_index }}").click(function(){
+      if ($('#current_option_{{ option_index }}').is(':visible')) {
+        $("#default_option_{{ option_index }}").click(function(){$("#current_option_{{ option_index }}").slideUp();})
+      }
+      else {
+        $("#current_option_{{ option_index }}").slideDown(); }
+        
+    });
+    
+    $("#current_option_{{ option_index }} li").click(function(event){
+      $("#default_option_{{ option_index }}").html($(this).text());
+      $("#current_option_{{ option_index }}").slideUp();
+    });
+  
+    $(document).mousedown(function() {
+      $("#current_option_{{ option_index }}").slideUp();
+    });
+  
+    
+</script>-->
+
+<!--
+<script type="text/javascript">
+    $("#default_option_{{ option_index }}").click(function(){
+      if ($('#current_option_{{ option_index }}').is(':visible')) {
+        $("#default_option_{{ option_index }}").click(function(){$("#current_option_{{ option_index }}").slideUp();})
+      }
+      else {
+        $("#current_option_{{ option_index }}").slideDown(); }
+        
+    });
+    
+    $("#current_option_{{ option_index }} li").click(function(event){
+      $("#default_option_{{ option_index }}").html($(this).text());
+      $("#current_option_{{ option_index }}").slideUp();
+    });
+  
+    $(document).mousedown(function() {
+      $("#current_option_{{ option_index }}").slideUp();
+    });
+  
+    
+</script> -->

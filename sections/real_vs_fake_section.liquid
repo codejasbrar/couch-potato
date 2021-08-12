@@ -1,0 +1,78 @@
+{% for block in section.blocks %}
+{% if block.settings.title != blank %}
+<div class="row pt-20">
+  <div class="col-md-12 real_title_row">
+    <h2 class="real_title mb-20">{{ block.settings.title }}</h2>
+  </div>
+  <div class="collapse mt-30" style="display:none;">
+    {% if block.settings.left_image != blank %}
+    <div class="col-md-5 real_left_image">
+      <img src="{{ block.settings.left_image | img_url: 'master' }}">
+    </div>
+    {% endif %}
+    {% if block.settings.right_video_url != blank %}
+    <div class="col-md-7 real_video">
+      <iframe width="100%" height="334"src="{{ block.settings.right_video_url }}"></iframe>
+    </div>
+    {% endif %}
+    <div class="col-md-12 real_bottom_description mt-60">
+      {{ block.settings.description }}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+<style>
+.real_title_row {
+  border-bottom: 2px solid #e9772a;
+  cursor: pointer;
+}
+</style>
+<script>
+  $(document).on('click','.real_title_row',function(){
+  	$(this).siblings('.collapse').slideToggle();
+  });
+</script>
+
+{% schema %}
+{
+"name": "Real Vs Fake Section",
+"settings": [],
+
+"blocks": [
+{
+"type": "text",
+"name": "Real Fake Data",
+"settings": [
+{
+"id": "title",
+"type": "text",
+"label": "title"
+},
+{
+"id": "left_image",
+"type": "image_picker",
+"label": "Left image"
+},
+{
+"id": "right_video_url",
+"type": "text",
+"label": "Right video url"
+},
+{
+"id": "description",
+"type": "richtext",
+"label": "Description"
+}
+]
+}
+]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

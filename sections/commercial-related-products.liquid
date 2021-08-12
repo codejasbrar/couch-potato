@@ -1,0 +1,25 @@
+
+<div class="collection-products mb-70{{ list_classes }}{{ centered_classes }}" data-js-products>
+  <div class="container">
+            <div class="row desktop_only" data-js-collection-replace="products">
+                {%- if  collection.products.size > 0 -%}
+                    
+            {%- for product in collection.products limit:3 -%}
+                <div class=" dcsc col-md-3 pr-45">
+                    {% include 'product-collection' product_margin_bottom: offset_collection_page_product_margin_bottom_d %}
+                </div>
+            {%- endfor -%}
+                {%- else -%}
+                    {%- assign is_empty_collection = true -%}
+                {%- endif -%}
+            </div>
+  </div>
+</div>
+
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

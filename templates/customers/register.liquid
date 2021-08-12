@@ -1,0 +1,99 @@
+
+<div class="register pb-60">
+  <div class="container-fluid">
+    <div id="CustomerLoginForm">
+      <div class="row">
+        <div class="col-md-12">
+          {% include 'breadcrumbs' %}
+        </div>
+      </div>
+      <div class="row mt-0 mb-20">
+        <div class="col-md-12">
+          <h1 class="h3 mb-5 bold">Create account</h1>
+          {% comment %}
+                    <h1 class="h3 mb-5 bold">{{ 'customer.register.title' | t }}</h1>
+{% endcomment %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+<!--         <h4 class="mandatory_title text-left mb-35">* Mandatory Field</h4> -->
+           {% form 'create_customer' %}
+       <div class="col-md-12">
+      <input type="text"
+             name="customer[first_name]"
+             id="FirstName"
+             class="form-control"
+             placeholder="{{ 'customer.register.first_name_placeholder' | t }}"
+             required="required"
+             autofocus
+             {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+    </div>
+     <div class="col-md-12">
+      <input type="text"
+             name="customer[last_name]"
+             id="LastName"
+               class="form-control"
+             placeholder="{{ 'customer.register.last_name_placeholder' | t }}"
+             required="required"
+             {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+    </div>
+     <div class="col-md-12">
+      <input type="email"
+             name="customer[email]"
+             id="Email"
+             class="form-control {% if form.errors contains 'email' %}input-error{% endif %}"
+             placeholder="{{ 'customer.register.email_placeholder' | t }}"
+             value="{% if form.email %}{{ form.email }}{% endif %}"
+             spellcheck="false"
+             autocomplete="off"
+             autocapitalize="off"
+             required="required">
+    </div>
+     <div class="col-md-12">
+      <input type="password"
+             name="customer[password]"
+             id="CreatePassword"
+             class="form-control {% if form.errors contains 'password' %}input-error{% endif %}"
+             placeholder="{{ 'customer.register.password_placeholder' | t }}"
+             required="required">
+    </div>
+     <div class="col-md-12">
+      {% include 'form-get-message' %}
+    </div>
+      <div class="col-md-12 mb-25">
+        <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn  btn--secondary"></div>
+              <div class="col-md-12 mb-20">
+                or <a href="{{ shop.url }}" class="h6 btn-link mt-0 mb-0 bold">{{ 'customer.login.cancel' | t }}</a>
+              </div>
+    {% endform %}
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+      
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+</div>

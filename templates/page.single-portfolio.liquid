@@ -1,0 +1,28 @@
+{% include 'global-variables' %}
+<div class="page">
+  {% include 'breadcrumbs' %}
+  <div class="container single_port_cont {% if offset_pages_margin_top_d > 0 %} mt-lg-{{ offset_pages_margin_top_d }}{% endif %} pb-60{% if offset_pages_margin_bottom_d > 0 %} mb-lg-{{ offset_pages_margin_bottom_d }}{% endif %}">
+    <h1 class="page__title single_title mt-10 mb-90 border-bottom">{{ page.title }}</h1>
+    
+    {% section 'single-portfolio-section' %}
+    
+   {% comment %}
+    <div class="rte">
+      {% include 'parse-for-icons' content: page.content %}
+    </div>
+   {% endcomment %}
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+ $('.carousel').slick({
+   slidesToShow: 1,
+   slidesToScroll: 1,
+   dots: false,
+   arrows: true
+ });
+</script>  

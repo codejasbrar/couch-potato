@@ -1,0 +1,67 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12 p-0 page_content">
+    {% if page.metafields.top_content.top_content != blank %}
+      <p class="mb-70">{{ page.metafields.top_content.top_content }}</p>
+    {% endif %}
+    {% if page.metafields.image.image != blank %}
+      <img src="{{ page.metafields.image.image }}" width="100%">
+    {% endif %}
+    {% if page.metafields.center_content.center_content != blank %}
+      <p class="my-80">{{ page.metafields.center_content.center_content }}</p>
+    {% endif %}
+    {% if page.metafields.video.video != blank %}
+      <iframe src="{{ page.metafields.video.video }}" width="100%" height="510" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+    {% endif %}
+    {% if page.metafields.bottom_content.bottom_content != blank %}
+      <p class="mt-80 mb-80">{{ page.metafields.bottom_content.bottom_content }}</p>
+    {% endif %}
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Spot the difference",
+    "settings": [
+                {
+                 "type": "text",
+                 "label": "Top Content",
+                 "id": "top_content"
+                 },
+                {
+                 "type": "image_picker",
+                 "label": "Image",
+                 "id": "image"
+                 },
+                {
+                 "type": "text",
+                 "label": "Center Content",
+                 "id": "center_content"
+                 },
+                {
+                 "type": "text",
+                 "label": "Video",
+                 "id": "video"
+                 },
+                {
+                 "type": "richtext",
+                 "label": "Bottom Content",
+                 "id": "bottom_content"
+                 }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

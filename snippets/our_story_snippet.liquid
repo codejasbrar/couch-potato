@@ -1,0 +1,23 @@
+<div class="tab-pane fade" id="{{ block.settings.tabs_link }}">
+          <h2 class="border-bottom">{{ block.settings.tabs_head }}</h2>
+        <div class="row why_us_content_row">
+          {% if block.settings.tabs_left_content != blank %}
+          <div class="col-md-5 left_content pr-50">
+             {{ block.settings.tabs_left_content }} <br>
+          {% if block.settings.tabs_left_content_signature != blank %}
+             <img class="mt-50 emma" src="{{ block.settings.tabs_left_content_signature | img_url: 'master' }}" width="142px">
+            {%endif%}
+          </div>
+          {% endif %}
+          
+          {% if block.settings.tabs_right_image != blank %}
+          <div class="col-md-7 right_img pl-0">
+             <img src="{{ block.settings.tabs_right_image | img_url: 'master' }}">
+            
+            {% if block.settings.tabs_right_image_btm_content != blank %}
+            <p class="mt-25 text-center">{{ block.settings.tabs_right_image_btm_content }}</p>            
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>

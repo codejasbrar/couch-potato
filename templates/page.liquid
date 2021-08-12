@@ -1,0 +1,115 @@
+{% include 'global-variables' %}
+<div class="page">
+  {% include 'breadcrumbs' %}
+  <div class="container {% if offset_pages_margin_top_d > 0 %} mt-lg-{{ offset_pages_margin_top_d }}{% endif %} pb-60{% if offset_pages_margin_bottom_d > 0 %} mb-lg-{{ offset_pages_margin_bottom_d }}{% endif %}">
+    <h1 class="page__title pb-10 mt-10 mb-40 border-bottom">{{ page.title }}</h1>
+    <div class="search_instant display_hide">
+      <form action="{{ routes.search_url }}" method="get" role="search" id="search_form_header">
+        <div class="d-flex">
+          <input type="search"
+                 class="mb-0"
+                 name="q"
+                 id="Search"
+                 value="{{ search.terms | escape }}"
+                 placeholder="{{ 'general.search.placeholder2' | t }}">
+          <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
+          <button type="submit" class="btn">{{ 'general.search.submit' | t }}</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="page_content rte">
+      {% include 'parse-for-icons' content: page.content %}
+    </div>
+
+  </div>
+</div>
+<style>
+  #search-results .search_instant #search_form_header {
+    position: relative;
+    margin: 0;
+    width: 700px;
+  }
+  .display_hide{
+    display:none;
+  }
+  .display_show{
+    display:block;
+  }
+
+  .search_instant #search_form_header input {
+    border: 1px solid;
+    background-color: transparent;
+  }
+  .search_instant #search_form_header button {
+    background-color: #2D2D2D;
+    color: #fff;
+    font-size: 12px;
+    text-transform: capitalize;
+    height: 41px;
+    width: 156px;
+  }  
+  #search-results .page__title {
+    border-bottom: 1px solid #f2f2f2;
+  }  
+  .custom-videos {
+    display: flex;
+    flex-flow: wrap;
+    row-gap: 110px;
+    column-gap: 78px;
+  }
+  #videos h1.page__title.mt-10 {
+    border-bottom: 1px solid #F7F8F9;
+    margin-bottom: 75px;
+  }
+  .custom-videos .columns.video-container>div {
+    margin-top: 22px;
+  }
+  .custom-videos .columns.video-container {
+    width: calc(50% - 39px);
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: left !important;
+    font: normal normal 600 21px/31px Poppins;
+    letter-spacing: 0px;
+    color: #434343;
+  }
+
+  @media(min-width:768px) and (max-width:1024px){
+    .custom-videos .columns.video-container>div iframe {
+      height: 250px;
+      position: unset;
+    }
+    .custom-videos .columns.video-container>div .rte__video-wrapper {
+      position: unset;
+      padding-bottom: 0;
+    }
+    .custom-videos .columns.video-container {
+      width: calc(50% - 39px);
+    }
+  } 
+  @media (max-width:767px){
+    .custom-videos {
+      row-gap: 50px;
+      column-gap: 30px;
+    }
+    .custom-videos .columns.video-container {
+      width: calc(100%);
+    }
+  }  
+</style>
+<script>
+  
+  $(document).ready(function(){
+    setTimeout(function(){
+      if($(".snize-search-results-content").find('li').hasClass('snize-no-products-found')){
+        $(".search_instant").removeClass('display_hide');      
+        $(".search_instant").addClass('display_show');      
+      }else{
+        $(".search_instant").removeClass('display_show');      
+      }
+    },1500);
+  
+  });
+
+</script>

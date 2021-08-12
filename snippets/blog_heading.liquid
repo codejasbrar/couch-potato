@@ -1,0 +1,6 @@
+<header class="mb-25 text-left" role="banner">
+      <h1 class="h2 mb-80 border-bottom">{{ article.title }}</h1>
+        {% capture author %}{{ article.author | upcase }}{% endcapture %}
+        {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+        {% comment %}<p class="mt-45 mb-0"> {{ date }} {% comment %} {{ 'blogs.article.author_on_date_html' | t: author: author, date: date }} {% endcomment %} </p>{% endcomment %}
+</header>

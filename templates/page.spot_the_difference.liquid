@@ -1,0 +1,18 @@
+{% include 'global-variables' %}
+<div class="page mt-50">
+  {% comment %}
+     {% include 'breadcrumbs' %}
+  {% endcomment %}
+  <div class="container {% if offset_pages_margin_top_d > 0 %} mt-lg-{{ offset_pages_margin_top_d }}{% endif %} pb-60{% if offset_pages_margin_bottom_d > 0 %} mb-lg-{{ offset_pages_margin_bottom_d }}{% endif %}">
+    <h1 class="page__title mt-30 mb-35 pb-15 border-bottom spot_title">{{ page.title }}</h1>
+    
+    {% section 'spot_the_difference' %}
+    
+    {% comment %}
+    <div class="rte">
+      {% include 'parse-for-icons' content: page.content %}
+    </div>
+    {% endcomment %}
+    
+  </div>
+</div>

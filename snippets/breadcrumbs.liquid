@@ -1,0 +1,84 @@
+{%- unless template == 'index' -%}
+{%- if settings.layout_show_breadcrumbs -%}
+<div class="container breadcrumbs pt-15">
+  <div class="">
+    <ul class="list-unstyled d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <li><a href="/" >{{ 'layout.breadcrumbs.home' | t }}</a></li>
+      {%- if template == 'page' -%}
+      <li><span>{{ page.title }}</span></li>
+      {%- elsif template == 'page.single_project' -%}
+      <li><a href="/pages/home-projects">Your Project</a></li>
+      <li><a href="/pages/home-projects">Home projects</a></li>
+      <li><span>{{ page.title }}</span></li>
+      {%- elsif template == 'page.interior-design-projects' -%}
+      <li><a href="/pages/interior-designers">Your Project</a></li>
+      <!--https://www.couchpotatocompany.com/pages/our-customers-->
+      <li><span>{{ page.title }}</span></li>
+      {%- elsif template == 'page.single-portfolio' -%}
+      <li><a href="/pages/our-customers">Our Customers</a></li>
+      <li><span>{{ page.title }}</span></li>
+      {%- elsif template contains 'product' -%}
+      {%- if collection.url -%}
+      <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+      {%else%}
+      <li><a href="/collections/all">Products</a></li>
+
+      {%- endif -%}
+      <li><span>{{ product.title }}</span></li>
+      {%- elsif template contains 'collection' and collection.handle -%}
+      {%- if current_tags -%}
+      {%- assign exceptions_filters = 'custom-filter|only_available=|page=' | split: '|' -%}
+      {%- assign correct_filters = 'page=|tag=|vendor=|type=|title=|price=' | split: '|' -%}
+      {%- assign filtered_current_tags = '' -%}
+      {%- for tag in current_tags -%}
+      {%- assign changed_tag = tag -%}
+      {%- for filter in exceptions_filters -%}
+      {%- if changed_tag contains filter -%}
+      {%- assign changed_tag = null -%}
+      {%- break -%}
+      {%- endif -%}
+      {%- endfor -%}
+      {%- for filter in correct_filters -%}
+      {%- if changed_tag contains filter -%}
+      {%- assign changed_tag = changed_tag | remove: filter -%}
+      {%- break -%}
+      {%- endif -%}
+      {%- endfor -%}
+      {%- if changed_tag != null -%}
+      {% capture filtered_current_tags %}{{ filtered_current_tags }}{% if filtered_current_tags != '' %}|{% endif %}{{ changed_tag }}{% endcapture %}
+      {%- endif -%}
+      {%- endfor -%}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      <li>{{ collection.title | link_to: url }}</li>
+      {%- if filtered_current_tags != '' -%}
+      {%- assign filtered_current_tags = filtered_current_tags | split: '|' -%}
+      <li><span>{{ filtered_current_tags | join: ' + ' }}</span></li>
+      {%- endif -%}
+
+      {% elsif template contains 'collection.banner' and collection.handle %}
+
+      <li><span><a href="/pages/brands">Brands</a> /{{ collection.title }}</span></li>
+      {%- else -%}
+      <li><span>{{ collection.title }}</span></li>
+      {%- endif -%}
+      {%- elsif template == 'blog' -%}
+      {%- if current_tags -%}
+      <li>{{ blog.title | link_to: blog.url }}</li>
+      <li><span>{{ current_tags | join: ' + '}}</span></li>
+      {%- else -%}
+      <li><span>{{ blog.title }}</span></li>
+      {%- endif -%}
+      {%- elsif template == 'article' -%}
+      <li>{{ blog.title | link_to: blog.url }}</li>
+      <li><span>{{ article.title }}</span></li>
+
+      {%- elsif template == 'customers/login' -%}
+      <li>login</li>
+      {%- else -%}
+      <li><span>{{ page_title }}</span></li>
+      {%- endif -%}
+    </ul>
+  </div>
+</div>
+{%- endif -%}
+{%- endunless -%}

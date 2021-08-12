@@ -1,0 +1,55 @@
+
+
+{%- paginate collection.products by 12 -%}
+  
+{% assign current_first_item = paginate.current_offset | plus:1 %}
+{% if paginate.pages == paginate.current_page %}
+{% assign current_displayed = paginate.items | modulo:paginate.page_size %}
+{% assign current_last_item = paginate.items %}
+{% else %}
+{% assign current_displayed = paginate.page_size %}
+{% assign current_last_item = paginate.current_offset | plus:paginate.page_size %}
+{% endif %}
+
+<div class="brand_banner_main">
+  <div class="brand_banner mt-30 mb-100 d-flex align-items-center justify-content-center" {% if collection.image != blank %} style="background-image: url({{ collection.image | img_url: 'master' }});" {% endif %}>
+    <h1 class="brands_title"{% if collection.image == blank %} style="color: #000;" {% endif %}>{{ collection.title }}</h1>
+  </div>
+  
+  <div class="container pb-80 border-bottom">
+  <div class="brand_desc rte">
+     {{ collection.description }}
+  </div>
+  </div>
+</div>
+
+<div class="container pt-80">
+   <div class="row">
+     {%- for product in collection.products -%}
+       <div class="col-md-3 coll_products">
+          {% include 'product-collection' product_margin_bottom: offset_collection_page_product_margin_bottom_d %}
+       </div>
+     {% endfor %}
+   </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-center mt-35 pagination">
+    {{ paginate | default_pagination: next: '<i class="fa fa-chevron-right" aria-hidden="true"></i>', previous: '<i class="fa fa-chevron-left" aria-hidden="true"></i>' }}
+</div>
+
+<div class="paginate_count mt-50 d-lg-flex justify-content-lg-center align-items-lg-center text-center" data-js-position-desktop="collection-info">
+       Showing {{ current_first_item }}{% unless current_first_item == current_last_item %} - {{ current_last_item }}{% endunless %} of {{ paginate.items }} products 
+</div>
+{%- endpaginate -%}
+{% schema %}
+  {
+    "name": "Brand Section",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

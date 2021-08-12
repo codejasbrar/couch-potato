@@ -1,0 +1,65 @@
+<div class="page">
+  {% include 'breadcrumbs' %}
+  <div class="container">
+    <h1 class="page__title mt-10">{{ page.title }}</h1>
+    <div class="rte">
+	{% section 'trade_enquiries' %}
+    </div>
+  </div>
+</div>
+{% section "trade-enquiry-form" %}
+<style>
+  .trade_blocks {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    text-align: center;
+    gap: 80px;
+    padding: 0 60px;
+    margin-top: 80px;
+    margin-bottom: 50px;
+  }
+  #trade-enquiries h1.page__title {
+    border-bottom: 1px solid #F3F3F3;
+    padding-bottom: 15px;
+  }
+  .trade_block h3 {
+    font-weight: 600;
+    margin: 43px 0;
+    font-size: 21px;
+    line-height: 31px;
+    font-family: Poppins,sans-serif;
+    color: #2D2D2D;
+  }
+  .trade_block p {
+    letter-spacing: 0px;
+    color: #2D2D2D;
+    opacity: 1;
+    font-size: 12px;
+    line-height: 21px;
+    font-weight: 600;
+    font-family: Poppins,sans-serif;
+  }
+  @media (min-width:768px) and (max-width:1200px){
+    .trade_bottom_content.px-60{
+      padding: 0 30px !important;
+    }
+    .trade_blocks {
+      gap: 20px;
+      padding: 0 30px;
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
+  }
+  @media (max-width:767px){
+    .trade_bottom_content.px-60{
+      padding: 0 30px !important;
+    }
+    .trade_blocks {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 0 30px;
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
+  }
+</style>

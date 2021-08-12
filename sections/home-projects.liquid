@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+     
+    {% for block in section.blocks %}
+       <div class="col-md-4 home_projects_div">
+         <div class="home_projects_inner"  style="background-image: url({{ block.settings.bg_image | img_url: 'master' }});">
+            <a href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+         </div>
+       </div>
+    {% endfor %}
+    
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Home Projects",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "projects",
+        "name": "Home Projects",
+        "settings": [
+          {
+            "id": "bg_image",
+            "type": "image_picker",
+            "label": "Project Image"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Project Title"
+          },
+          {
+            "id": "link",
+            "type": "url",
+            "label": "Project Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

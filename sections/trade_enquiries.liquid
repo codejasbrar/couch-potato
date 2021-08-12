@@ -1,0 +1,60 @@
+<div class="trade_top_content px-60 mt-50">
+      <p>{{ page.content }}</p>
+</div>
+
+<div class="trade_blocks">
+{% for block in section.blocks %}
+{% if block.settings.image != blank %}
+
+<div class="trade_block">
+  <img src="{{ block.settings.image | img_url:'master' }}">
+  <h3>{{block.settings.title}}</h3>
+  <p>{{block.settings.description}}</p>
+</div>
+{% endif %}
+{% endfor %}
+</div>  
+<div class="trade_bottom_content px-60">
+      {{ section.settings.bottom_content }}
+</div>
+{% schema %}
+{
+"name": "Trade Enquiries Section",
+"max_blocks":3,   
+"settings":[
+{
+"id": "bottom_content",
+"type": "richtext",
+"label": "Bottom content"
+}
+],
+"blocks": [
+{
+"type": "contents",
+"name": "Block",
+"settings": [
+{
+"id": "image",
+"type": "image_picker",
+"label": "Image"
+},
+{
+"id": "title",
+"type": "text",
+"label": "Title"
+},
+{
+"id": "description",
+"type": "textarea",
+"label": "Description"
+}
+]
+}
+]
+}
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

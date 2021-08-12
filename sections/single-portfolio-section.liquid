@@ -1,0 +1,66 @@
+<div class="container single_port_cont">
+  <div class="row tablet_only">
+    <div class="col-md-12 p-0 tablet_image">
+      {% if page.metafields.single_image.single_image != blank %}
+       <img class="mb-50" src="{{ page.metafields.single_image.single_image }}">
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9 pl-0 single_portfolio_left">
+      {% if page.metafields.single_image.single_image != blank %}
+      <div class="carousel">
+      {% for image in page.metafields.single_image.single_image %}
+          <div class="carousel__item">
+            <img class="mb-50" src="{{ image }}">
+          </div>
+      {% endfor %}
+      </div>
+      {% endif %}
+      <p>{{page.metafields.single_description.single_description}}</p>
+      
+        <div class="row mt-50 social_share desktop_only">
+            <div class="col-1 pr-md-5 mb-20">
+              <p class="mt-5 mb-0">{{ 'blogs.article.share' | t }}</p>
+            </div>
+            <div class="col-11 mb-20">
+              {% render 'social-share' share_type: section.settings.social_share_buttons_type share_title: article.title share_permalink: article.url share_image: article.image %}
+            </div>
+          </div>
+      
+    </div>
+    <div class="col-md-3 single_portfolio_sidebar">
+      {% if page.metafields.sidebar_title.sidebar_title != blank %}
+      <h3 class="pb-10 mb-20 border-bottom">{{page.metafields.sidebar_title.sidebar_title}}</h3>
+      {% endif %}
+      <p>{{page.metafields.sidebar_content.sidebar_content}}</p>
+    </div>
+  </div>
+  
+        <div class="row mt-50 social_share mobile_only">
+            <div class="col-1 col-xs-2 p-0 mb-20">
+              <p class="mt-0 mb-0">{{ 'blogs.article.share' | t }}</p>
+            </div>
+            <div class="col-11  col-xs-10 mb-20">
+              {% render 'social-share' share_type: section.settings.social_share_buttons_type share_title: article.title share_permalink: article.url share_image: article.image %}
+            </div>
+          </div>
+</div>
+<style>
+  .slick-next:before, .slick-prev:before{
+  color: #000 !important;
+  }
+</style>
+{% schema %}
+  {
+    "name": "Single portfolio section",
+    "settings": [
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,23 @@
+
+{% include 'breadcrumbs' %}
+{% section 'product' %}
+{% section 'only-image-section' %}
+{% section 'product-author-section' %}
+{%- if settings.product_info_page_show_related_products -%}
+    {% section 'carousel-related-products' %}
+{%- endif -%}
+
+{% section 'carousel-products' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+ $('.Color.options').slick({
+   slidesToShow: 5,
+   slidesToScroll: 1,
+   dots: false,
+   arrows: true
+ });
+</script>  

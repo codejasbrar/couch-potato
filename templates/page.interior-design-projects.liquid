@@ -1,0 +1,90 @@
+
+{% include 'breadcrumbs' %}
+
+<div class="container">
+<div class="col-md-12 sixteen columns clearfix collection_nav interior text-left p-0">
+  <h1 class="collection_title interior_title border-bottom pb-15 mb-70">
+    {{ page.title }}
+  </h1>
+</div>
+</div>
+
+
+{% section 'interior_design_section' %}
+
+{% comment %}
+<div class="sixteen columns page">
+  <div id="interior_slider" class="flexslider interior_slide">
+    <h3>Choose a category:</h3>
+    <ul class="slides">
+      {% for i in (1..5) %}
+      {% capture bannerImg %}interior_slide_image_{{ i }}{% endcapture %}
+      {% if settings[bannerImg] != blank %}
+      <li><img src="{{ settings[bannerImg] | img_url: 'master' }}"></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {{ page.content }}
+</div>
+
+<div class="form_section">
+  <div class="six columns interior_icon">
+    <ul class="form_icon_section">
+      <li class="request-a-sample-form form_icon_1">
+        <img class="image_svg" src="{{ 'i1_new.svg' | asset_url }}">
+        <span>Request a Sample</span>
+      </li>
+      <li class="request-an-image-form form_icon_2">
+        <img class="image_svg" src="{{ '2-request-a-drawing.svg' | asset_url }}">
+        <span>Request an image</span>
+      </li>
+      <li class="price-a-project-form form_icon_3">
+        <img class="image_svg" src="{{ '3-register-a-project.svg' | asset_url }}">
+        <span>Price a project</span>
+      </li>
+      <li class="open-an-account-form form_icon_4">
+        <img class="image_svg" src="{{ 'i4_new.svg' | asset_url }}">
+        <span>open an account</span>
+      </li>
+      <li class="request-a-product-loan-form form_icon_5">
+        <img class="image_svg" src="{{ 'i5_new.svg' | asset_url }}">
+        <span>Request a Product Loan</span>
+      </li>
+      <li class="ask-a-question-form form_icon_6">
+        <img class="image_svg" src="{{ 'i6_new.svg' | asset_url }}">
+        <span>Ask a Question</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="ten columns all_form interior_form">
+    <div class="interior-design-form form-1">
+      {% include 'request-a-sample-form' %}
+    </div>
+
+    <div class="interior-design-form form-2">
+      {% include 'request-an-image-form' %}
+    </div>
+
+    <div class="interior-design-form form-3">
+      {% include 'price-a-project-form' %}
+    </div>
+
+    <div class="interior-design-form form-4">
+    </div>
+    <div class="interior-design-form form-5">
+    </div>
+    <div class="interior-design-form form-6">
+    </div>
+  </div>
+</div>             
+
+
+{% endcomment %}
+
+<style>
+  .all_form > div {display:none;}
+  .form-line-active input:focus, .form-line-active textarea:focus{box-shadow:none !important;}
+  .form-line-error{background:none !important;}
+</style>

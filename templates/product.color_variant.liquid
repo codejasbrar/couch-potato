@@ -1,0 +1,9 @@
+{% include 'breadcrumbs' %}
+{% section 'product' %}
+{% section 'only-image-section' %}
+{% section 'product-author-section' %}
+{%- if settings.product_info_page_show_related_products -%}
+    {% section 'carousel-related-products' %}
+{%- endif -%}
+
+{% section 'carousel-products' %}

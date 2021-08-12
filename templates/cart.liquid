@@ -1,0 +1,9 @@
+{% include 'breadcrumbs' %}
+{%- if settings.product_format_pjpg -%}
+    {%- assign image_format = 'pjpg' -%}
+{%- else -%}
+    {%- assign image_format = null -%}
+{%- endif -%}
+
+
+{% section 'cart-template' %}

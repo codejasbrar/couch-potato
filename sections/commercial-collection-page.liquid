@@ -1,0 +1,71 @@
+{% include 'breadcrumbs' %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 coll_title">
+        <h1 class="page__title pb-10 mb-65 border-bottom">{{ collection.title }}</h1>
+    </div>
+    <div class="col-md-9 mb-65 commercial_left">
+      {% if collection.metafields.Coll_image.coll_image != blank %}
+        <img src="{{ collection.metafields.Coll_image.coll_image }}" width="100%" height="397">
+      {% endif %}
+      {% if collection.metafields.Description_title.Description_title != blank %}
+        <h2 class="mt-60 mb-20 commercial_desc_title">{{collection.metafields.Description_title.Description_title}}</h2>
+      {% endif %}
+      {% if collection.metafields.description.description != blank %}
+        <p class="mb-0">{{collection.metafields.description.description}}</p>
+      {% endif %}    
+        <div class="row mt-30 social_share border-bottom">
+            <div class="col-1 pr-md-5 mb-20">
+              <p class="m-0 mb-0">{{ 'blogs.article.share' | t }}</p>
+            </div>
+            <div class="col-11 mb-20">
+              {% render 'social-share' share_type: section.settings.social_share_buttons_type share_title: article.title share_permalink: article.url share_image: article.image %}
+            </div>
+          </div>
+    </div>
+    <div class="col-md-3 commercial_right_sidebar">
+      {% if collection.metafields.Sidebar_title.Sidebar_title != blank %}
+        <h2 class="comm_right_title">{{collection.metafields.Sidebar_title.Sidebar_title}}</h2>
+      {% endif %}
+      {% if collection.metafields.Sidebar_content.Sidebar_content != blank %}
+        <p>{{collection.metafields.Sidebar_content.Sidebar_content}}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row tablet_only">
+    <div class="col-sm-6 commercial_left">
+    
+      {% if collection.metafields.Description_title.Description_title != blank %}
+        <h2 class="mt-60 mb-20 commercial_desc_title">{{collection.metafields.Description_title.Description_title}}</h2>
+      {% endif %}
+      {% if collection.metafields.description.description != blank %}
+        <p class="mb-0">{{collection.metafields.description.description}}</p>
+      {% endif %}    
+        <div class="row mt-30 social_share border-bottom">
+            <div class="col-sm-2 pr-md-5 mb-20">
+              <p class="m-0 mb-0">{{ 'blogs.article.share' | t }}</p>
+            </div>
+            <div class="col-sm-10 mb-20">
+              {% render 'social-share' share_type: section.settings.social_share_buttons_type share_title: article.title share_permalink: article.url share_image: article.image %}
+            </div>
+          </div>
+      
+    </div>
+    <div class="col-sm-6 mt-60 commercial_right_sidebar">
+      {% if collection.metafields.Sidebar_title.Sidebar_title != blank %}
+        <h2 class="mb-20 comm_right_title">{{collection.metafields.Sidebar_title.Sidebar_title}}</h2>
+      {% endif %}
+      {% if collection.metafields.Sidebar_content.Sidebar_content != blank %}
+        <p>{{collection.metafields.Sidebar_content.Sidebar_content}}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

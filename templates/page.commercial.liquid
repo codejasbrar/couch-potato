@@ -1,0 +1,15 @@
+{% include 'global-variables' %}
+<div class="page">
+  {% include 'breadcrumbs' %}
+  <div class="container single_port_cont {% if offset_pages_margin_top_d > 0 %} mt-lg-{{ offset_pages_margin_top_d }}{% endif %} pb-60{% if offset_pages_margin_bottom_d > 0 %} mb-lg-{{ offset_pages_margin_bottom_d }}{% endif %}">
+    <h1 class="page__title commercial_title mt-10 mb-15 pb-10 border-bottom">{{ page.title }}</h1>
+    <div class="rte single_portfolio_left">
+      <p class="mb-100">
+      {% include 'parse-for-icons' content: page.content %}
+      </p>
+    </div>
+    
+    {% section 'commercial-section' %}
+    
+  </div>
+</div>
